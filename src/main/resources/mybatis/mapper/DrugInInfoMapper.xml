@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfu.drug.mapper.DrugInInfoMapper">
+    <update id="updatebyDruginnum">
+        Update drug_in_info Set drugRetuen = drugRetuen + ${drugretuen},drugCount = drugCount - ${drugretuen},outTime = #{outtime},drugOutPrice = drugOutPrice + #{drugoutprice} Where drugInNum = #{druginnum}
+    </update>
+    <update id="updateDrugCountByDruginnum">
+        Update drug_in_info Set drugCount = drugCount - ${drugcount} Where drugInNum = #{druginnum}
+    </update>
+    <update id="updateDrugRetuenByDruginnum">
+        Update drug_in_info Set drugRetuen = drugRetuen + ${drugcount} Where drugInNum = #{druginnum}
+    </update>
+    <update id="updateAddDrugCountByDruginnum">
+        Update drug_in_info Set drugCount = drugCount + ${drugcount} Where drugInNum = #{druginnum}
+    </update>
+
+    <select id="selectMaxID" resultType="java.lang.Integer">
+        SELECT IFNULL(MAX(id),0) FROM drug_in_info
+    </select>
+    <select id="drugInInfoListByDrugName" resultType="com.nfu.drug.pojo.DrugInInfo">
+        select * from drug_in_info where name = #{dname}
+    </select>
+    <select id="selectDrugCountByDruginnum" resultType="java.lang.Integer">
+        SELECT drugCount FROM drug_in_info where drugInNum = #{druginnum}
+    </select>
+    <select id="drugInInfoListByDrugCount" resultType="com.nfu.drug.pojo.DrugInInfo">
+        select * from drug_in_info where drugCount = 0
+    </select>
+    <select id="drugInInfoListOnly" resultType="com.nfu.drug.pojo.DrugInInfo">
+        select distinct name from drug_in_info
+    </select>
+</mapper>

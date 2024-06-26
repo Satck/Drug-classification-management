@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfu.drug.mapper.BillInfoMapper">
+
+    <select id="queryDrugInfoListBySName" resultType="com.nfu.drug.pojo.BillInfo">
+        select * from bill_info WHERE sname = #{sName}
+    </select>
+    <select id="selectCountByDrugInnum" resultType="com.nfu.drug.pojo.BillInfo">
+        select * from bill_info WHERE drugInNum = #{druginnum}
+    </select>
+</mapper>

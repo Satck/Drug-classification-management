@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/css/xadmin.css}">
+    <script th:href="@{/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:href="@{/static/xadmin.js}"></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <blockquote class="layui-elem-quote">欢迎药品管理员：
+                        <span class="x-red"><b id="userName"></b> </span>！当前时间:<b id="time"></b><span class="x-green"><b
+                                id="greet"></b></span>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">药品相关信息统计</div>
+                <div class="layui-card-body ">
+                    <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+                        <li class="layui-col-md2 layui-col-xs6">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>药品在售数量</h3>
+                                <p>
+                                    <cite id="inSellDrug"></cite>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>药品库存数量</h3>
+                                <p>
+                                    <cite id="stockNum"></cite></p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6">
+                            <a href="javascript:;" class="x-admin-backlog-body" >
+                                <h3 >总药品销售数量</h3>
+                                <p>
+                                    <cite id="drugAllNum"></cite></p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>总药品退货数量</h3>
+                                <p>
+                                    <cite id="allReturnDrugNum"></cite>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>总问题药品数量</h3>
+                                <p>
+                                    <cite id="allProblemDrugNum"></cite></p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6 ">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>药品在售类型数量</h3>
+                                <p>
+                                    <cite id="inSellDrugType"></cite></p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+<!--        <style id="welcome_style"></style>-->
+<!--        <div class="layui-col-md12">-->
+<!--            <blockquote class="layui-elem-quote layui-quote-nm">欢迎使用药品库存与销售管理系统！</blockquote>-->
+<!--        </div>-->
+    </div>
+</div>
+</div>
+</body>
+<script src="static/jquery/jquery.min.js"></script>
+<script>
+    //获取登录用户的名字
+    $.ajax({
+        url: '/welcome/userName',
+        type: 'get',
+        async: false,
+        success: function (user) {
+            document.getElementById("userName").innerText = user;
+        }
+    });
+
+    //获取所有在售药品的数量
+    $.ajax({
+        url: '/welcome/inSellDrug',
+        type: 'get',
+        async: false,
+        success: function (inSellDrug) {
+            document.getElementById("inSellDrug").innerText = inSellDrug;
+        }
+    });
+
+    //获取所有药品的库存数量
+    $.ajax({
+        url: '/welcome/stockNum',
+        type: 'get',
+        async: false,
+        success: function (stockNum) {
+            document.getElementById("stockNum").innerText = stockNum;
+        }
+    });
+
+    //获取所有药品的销售数量
+    $.ajax({
+        url: '/welcome/drugAllNum',
+        type: 'get',
+        async: false,
+        success: function (drugAllNum) {
+            document.getElementById("drugAllNum").innerText = drugAllNum;
+        }
+    });
+
+    //获取所有药品的退货数量
+    $.ajax({
+        url: '/welcome/allReturnDrugNum',
+        type: 'get',
+        async: false,
+        success: function (allReturnDrugNum) {
+            document.getElementById("allReturnDrugNum").innerText = allReturnDrugNum;
+        }
+    });
+
+    //获取所有问题药品的数量
+    $.ajax({
+        url: '/welcome/allProblemDrugNum',
+        type: 'get',
+        async: false,
+        success: function (allProblemDrugNum) {
+            document.getElementById("allProblemDrugNum").innerText = allProblemDrugNum;
+        }
+    });
+
+    //获取所有在售药品的种类
+    $.ajax({
+        url: '/welcome/inSellDrugType',
+        type: 'get',
+        async: false,
+        success: function (inSellDrugType) {
+            document.getElementById("inSellDrugType").innerText = inSellDrugType;
+        }
+    });
+
+    function getTime() {
+        let date = new Date();
+        let time = date.toLocaleString();
+        document.getElementById("time").innerText = time;
+        if (checkAuditTime("6:01", "11:00")) {
+            document.getElementById("greet").innerText = "，早上好，欢迎使用药品库存与销售管理系统！";
+        } else if (checkAuditTime("11:01", "13:00")) {
+            document.getElementById("greet").innerText = "，中午好，欢迎使用药品库存与销售管理系统！";
+        } else if (checkAuditTime("13:01", "18:00")) {
+            document.getElementById("greet").innerText = "，下午好，欢迎使用药品库存与销售管理系统！";
+        } else if (checkAuditTime("18:01", "22:00")) {
+            document.getElementById("greet").innerText = "，晚上好，欢迎使用药品库存与销售管理系统！";
+        } else if (checkAuditTime("22:01", "23:59") || checkAuditTime("00:00", "6:00")) {
+            document.getElementById("greet").innerText = "，夜深了，请尽快休息。";
+        }
+
+    }
+
+    //判断当前的时间
+    function checkAuditTime(beginTime, endTime) {
+        let nowDate = new Date();
+        let beginDate = new Date(nowDate);
+        let endDate = new Date(nowDate);
+
+        let beginIndex = beginTime.lastIndexOf("\:");
+        let beginHour = beginTime.substring(0, beginIndex);
+        let beginMinue = beginTime.substring(beginIndex + 1, beginTime.length);
+        beginDate.setHours(beginHour, beginMinue, 0, 0);
+
+        let endIndex = endTime.lastIndexOf("\:");
+        let endHour = endTime.substring(0, endIndex);
+        let endMinue = endTime.substring(endIndex + 1, endTime.length);
+        endDate.setHours(endHour, endMinue, 0, 0);
+        return nowDate.getTime() - beginDate.getTime() >= 0 && nowDate.getTime() <= endDate.getTime();
+    }
+
+    window.onload = function () {
+        getTime();
+        setInterval(getTime, 1000);
+    }
+
+</script>
+
+
+</html>
